@@ -12,6 +12,8 @@ public class AStar : MonoBehaviour
 
     public List<Node> Path = new List<Node>();
 
+    public PlayerController PlayerController;
+
     private List<Node> _openNodes = new List<Node>();
     private List<Node> _closedNodes = new List<Node>();
 
@@ -159,7 +161,8 @@ public class AStar : MonoBehaviour
         Path.Clear();
 
         Node node = NodeContainer.EndNode;
-        while (node != NodeContainer.StartNode)
+        while (node != null)
+        //while (node != NodeContainer.StartNode)
         {
             Path.Insert(0, node);
 
@@ -172,5 +175,10 @@ public class AStar : MonoBehaviour
         }
 
         U.d("Fitness Path Found!!!");
+
+        PlayerController.Path = Path;
+        PlayerController.Move();
     }
+
+
 }
