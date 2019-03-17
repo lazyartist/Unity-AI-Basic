@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour {
                     // 목적지 도착
                     _moving = false;
                     Player.GetComponentInChildren<Animator>().SetBool("Attack", true);
+                    Player.GetComponentInChildren<Animator>().SetBool("Run", false);
                     U.d("Move Complete!!!");
                 }
             }
@@ -44,6 +45,10 @@ public class PlayerController : MonoBehaviour {
 
     public void Move()
     {
+        Player.transform.localPosition = new Vector3(-3f, 0, 0);
+        Player.GetComponentInChildren<Animator>().SetBool("Attack", false);
+        Player.GetComponentInChildren<Animator>().SetBool("Run", true);
+
         _moving = true;
         _targetNodeIndex = -1;
         GetNextNode();

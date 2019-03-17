@@ -7,6 +7,8 @@ public class Node : MonoBehaviour {
     public Node ParentNode;
     public GameObject Arrow;
 
+    public int PositionIndex;
+
     public bool IsBlock = false;
 
     public float fitness; // 적절성 : goal + heuristic
@@ -37,7 +39,7 @@ public class Node : MonoBehaviour {
     {
         Renderer.material.SetColor("_Color", Color.red);
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(3.0f);
 
         Renderer.material.SetColor("_Color", _color);
     }
@@ -49,8 +51,6 @@ public class Node : MonoBehaviour {
 
         Vector3 dis = ParentNode.transform.position - this.transform.position;
         float radian = Mathf.Atan2(dis.z, dis.x);
-        //float radian = Mathf.Acos(dis.x / dis.magnitude);
-        //float radian = dis.x / dis.magnitude;
         float degree = radian * Mathf.Rad2Deg * -1;
 
         Arrow.transform.rotation = Quaternion.Euler(new Vector3(0, degree, 0));

@@ -11,12 +11,18 @@ public class AStar : MonoBehaviour
 
     public List<Node> Path = new List<Node>();
     public bool AutoStartToSearch = false;
+    public bool IsCharacterMoving = false;
 
     private List<Node> _openNodes = new List<Node>();
     private List<Node> _closedNodes = new List<Node>();
     private Node _curNode;
 
     private void Start()
+    {
+        Init();
+    }
+
+    void Init()
     {
         NodeContainer.CreateNodes();
 
@@ -38,6 +44,12 @@ public class AStar : MonoBehaviour
                 else if (hit.collider.tag == "Auto" && _curNode != null)
                 {
                     AutoStartToSearch = true;
+                }
+                else if (hit.collider.tag == "Reset")
+                {
+                    AutoStartToSearch = false;
+                    _curNode = null;
+                    Init();
                 }
             }
         }
@@ -130,9 +142,11 @@ public class AStar : MonoBehaviour
             }
         }
 
-        if (fitnessNode == curNode)
+        if (fitnessNode == curNode || fitnessNode == null)
         {
             // 오픈 노드가 없다. 종료
+            U.d("Path Not Fount!!!");
+            _curNode = null;
             return;
         }
 
@@ -157,11 +171,10 @@ public class AStar : MonoBehaviour
 
         Node node = NodeContainer.EndNode;
         while (node != null)
-        //while (node != NodeContainer.StartNode)
         {
             Path.Insert(0, node);
 
-            if(node != NodeContainer.EndNode && node != NodeContainer.StartNode)
+            if (node != NodeContainer.EndNode && node != NodeContainer.StartNode)
             {
                 node.SetColor(Color.yellow);
             }
@@ -171,7 +184,10 @@ public class AStar : MonoBehaviour
 
         U.d("Path Found!!!");
 
-        PlayerController.Path = Path;
-        PlayerController.Move();
+        if (IsCharacterMoving)
+        {
+            PlayerController.Path = Path;
+            PlayerController.Move();
+        }
     }
 }
