@@ -76,7 +76,7 @@ public class PlayerUnit : Unit {
             // 두 벡터 Quaternion 각도 
             //Quaternion rotation = Quaternion.FromToRotation(collidedAhead + collidedAheadCrossProduct, collidedAhead);
             Quaternion rotation = Quaternion.FromToRotation(collidedAhead, collidedAhead + collidedAheadCrossProduct);
-            //transform.Rotate(rotation.eulerAngles); // 각도 더하기
+            transform.Rotate(rotation.eulerAngles); // 각도 더하기
             Debug.Log(rotation.eulerAngles);
         }
     }
