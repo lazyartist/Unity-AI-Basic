@@ -351,9 +351,11 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 512
-  MeshResolution: 0.5
   ViewMesh: {fileID: 0}
   ViewMeshFilter: {fileID: 1135974383}
+  MeshResolution: 1
+  edgeResolveIterations: 0
+  edgeDstThreshold: 0
   MaskCutawayDst: 0.1
   visibleTargets: []
 --- !u!114 &239777387
